@@ -1,0 +1,91 @@
+Solution for n=10, p=2 :
+Best Hubs  : 7, 3
+Objective  : 167894.28
+Allocation : 3, 3, 3, 3, 3, 7, 7, 7, 7, 7
+The time use for run code in 10 node and 2 hubs is: 0.01 seconds
+
+Solution for n=10, p=3 :
+Best Hubs  : 4, 7, 3
+Objective  : 136671.11
+Allocation : 3, 4, 3, 4, 3, 4, 7, 7, 7, 7
+The time use for run code in 10 node and 3 hubs is: 0.02 seconds
+
+Solution for n=10, p=4 :
+Best Hubs  : 4, 7, 8, 3
+Objective  : 113336.23
+Allocation : 3, 4, 3, 4, 3, 4, 7, 8, 7, 8
+The time use for run code in 10 node and 4 hubs is: 0.02 seconds
+
+Solution for n=20, p=2 :
+Best Hubs  : 14, 6
+Objective  : 173339.27
+Allocation : 6, 6, 6, 6, 6, 6, 6, 6, 14, 6, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14
+The time use for run code in 20 node and 2 hubs is: 0.11 seconds
+
+Solution for n=20, p=3 :
+Best Hubs  : 14, 6, 12
+Objective  : 152054.17
+Allocation : 6, 6, 6, 12, 6, 6, 6, 12, 14, 6, 12, 12, 14, 14, 14, 12, 14, 14, 14, 14
+The time use for run code in 20 node and 3 hubs is: 0.16 seconds
+
+Solution for n=20, p=4 :
+Best Hubs  : 14, 6, 2, 12
+Objective  : 136147.32
+Allocation : 2, 2, 6, 12, 6, 6, 6, 12, 14, 6, 12, 12, 14, 14, 14, 12, 14, 14, 14, 14
+The time use for run code in 20 node and 4 hubs is: 0.20 seconds
+
+Solution for n=40, p=2 :
+Best Hubs  : 28, 12
+Objective  : 178290.21
+Allocation : 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28
+The time use for run code in 40 node and 2 hubs is: 1.83 seconds
+
+Solution for n=40, p=3 :
+Best Hubs  : 22, 28, 12
+Objective  : 159496.91
+Allocation : 12, 12, 12, 12, 12, 12, 22, 22, 12, 12, 12, 12, 12, 22, 22, 22, 12, 28, 28, 22, 22, 22, 22, 22, 28, 28, 28, 28, 28, 28, 22, 22, 28, 28, 28, 28, 28, 28, 28, 28
+The time use for run code in 40 node and 3 hubs is: 2.67 seconds
+
+Solution for n=40, p=4 :
+Best Hubs  : 22, 28, 12, 26
+Objective  : 143968.88
+Allocation : 12, 12, 12, 12, 12, 12, 22, 22, 26, 12, 12, 12, 12, 22, 22, 22, 26, 26, 26, 22, 22, 22, 22, 22, 26, 26, 26, 28, 28, 28, 22, 22, 26, 26, 26, 28, 28, 28, 28, 28
+The time use for run code in 40 node and 4 hubs is: 3.49 seconds
+
+Solution for n=50, p=2 :
+Best Hubs  : 35, 15
+Objective  : 178875.75
+Allocation : 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 35, 35, 35, 15, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35
+The time use for run code in 50 node and 2 hubs is: 5.33 seconds
+
+Solution for n=50, p=3 :
+Best Hubs  : 14, 28, 35
+Objective  : 159236.73
+Allocation : 14, 14, 14, 14, 14, 14, 14, 14, 28, 28, 14, 14, 14, 14, 14, 14, 14, 28, 28, 28, 14, 14, 35, 35, 28, 28, 28, 28, 28, 28, 35, 35, 35, 35, 35, 35, 35, 35, 28, 28, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35
+The time use for run code in 50 node and 3 hubs is: 7.78 seconds
+
+Solution for n=50, p=4 :
+Best Hubs  : 35, 14, 32, 28
+Objective  : 143670.12
+Allocation : 14, 14, 14, 14, 14, 14, 14, 14, 28, 28, 32, 14, 14, 14, 14, 14, 14, 28, 28, 28, 32, 32, 32, 32, 28, 28, 28, 28, 28, 28, 32, 32, 32, 35, 35, 35, 35, 35, 28, 28, 32, 32, 32, 32, 35, 35, 35, 35, 35, 35
+The time use for run code in 50 node and 4 hubs is: 10.25 seconds
+
+Solution for n=100, p=2 :
+Best Hubs  : 71, 29
+Objective  : 181020.37
+Allocation : 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 71, 71, 71, 29, 71, 71, 29, 71, 71, 71, 71, 29, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71
+The time use for run code in 100 node and 2 hubs is: 42.96 seconds
+
+
+Solution for n=100, p=3 :
+Best Hubs  : 28, 70, 55
+Objective  : 161568.77
+Allocation : 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 55, 55, 55, 55, 55, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 55, 55, 55, 55, 55, 55, 55, 28, 28, 28, 70, 70, 28, 70, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 55, 55, 55, 55, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
+The time use for run code in 100 node and 3 hubs is: 66.41 seconds
+
+Solution for n=100, p=4 :
+Best Hubs  : 28, 70 , 55, 64
+Objective  : 145916.13
+Allocation : 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 55, 55, 55, 55, 55, 64, 64, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 55, 55, 55, 55, 55, 55, 55, 64, 64, 64, 64, 64, 64, 64, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 64, 64, 64, 64, 64, 64, 64, 70, 70, 70, 70, 70, 70, 70, 70, 70, 55, 55, 55, 55, 64, 64, 64, 64, 64, 64, 64, 64, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
+The time use for run code in 100 node and 4 hubs is: 88.38 seconds
+
