@@ -81,6 +81,7 @@ def get_initial_solution_robust(n, p, weights, distances):
     potential_hub = cal_weights(n, weights)
     hubs = sorted(potential_hub, key=potential_hub.get)[:p]
     
+    print(f"Potential Hub: {potential_hub}")
     # allocation = cal_distance(hubs, n, distances)
     allocation = [min(hubs, key=lambda x: distances[i][x]) for i in range(n)]
     return hubs, allocation
@@ -93,7 +94,7 @@ def calculate_total_cost(assignments, n, weights, distances, alpha, delta, ksi):
         for j in range(n):
                 k = assignments[i]
                 l = assignments[j]
-                total_cost += weights[i, j] * (delta * distances[i, k] + alpha * distances[k, l] + ksi * distances[l, j])
+                total_cost += weights[i, j] * (ksi * distances[i, k] + alpha * distances[k, l] + delta * distances[l, j])
     return total_cost
 
 
@@ -109,9 +110,6 @@ def calculate_total_cost(assignments, n, weights, distances, alpha, delta, ksi):
 #                 new_assignments =  [random.choice(new_hubs) for _ in range(n)]
 #                 neighborhood.append((new_hubs, new_assignments))
 #     return neighborhood
-
-from queue import PriorityQueue
-
 
 
 
@@ -143,13 +141,13 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi):
     # max_iterations = 100
     
     if n <= 20:
-        max_iterations = 10
+        max_iterations = 4
     elif n == 30:
-        max_iterations = 15
+        max_iterations = 4
     elif n == 40:
-        max_iterations = 20
+        max_iterations = 4
     elif n > 40:
-        max_iterations = 30
+        max_iterations = 10
     
     
     path = []
@@ -159,7 +157,7 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi):
         best_candidate_hubs, best_candidate_assignments = None, None
         best_candidate_cost = float('inf')
 
-        # Explore the neighborhood (p*N)
+        # Explore the neighborhood (p*(n-p))
         for candidate_hubs, candidate_assignments in neighborhood:
             if (candidate_hubs, candidate_assignments) not in tabu_list:
                 candidate_cost = calculate_total_cost(candidate_assignments, n, weights, distances, alpha, delta, ksi)

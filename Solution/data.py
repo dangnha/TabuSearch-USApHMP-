@@ -20,4 +20,5 @@ def initial_coords(n, p):
     return coords
 
 # n, p, alpha, delta, ksi, coords, weights, distances = initial_parameter("10.2")
-# print(n, p, alpha, delta, ksi, coords, weights, distances)
+# print(distances)
+

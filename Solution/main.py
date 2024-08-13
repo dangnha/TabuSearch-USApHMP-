@@ -3,8 +3,7 @@ from utils import tabu_search
 from data import initial_parameter
 
 # experements = ["10.2", "10.3", "10.4", "20.2", "20.3", "20.4", "40.2", "40.3", "40.4", "50.2", "50.3", "50.4", "100.2", "100.3", "100.4"]
-experements = ["100.3", "100.4"]
-
+experements = ["10.2"]
 
 for file_db in experements:
     n, p, alpha, delta, ksi, coords, weights, distances = initial_parameter(file_db)
@@ -55,13 +54,13 @@ for file_db in experements:
     print(f"The time use for run code in {n} node and {p} hubs is: {timee} seconds")
     
     
-    with open('Solution/solution.txt', 'a') as file:
-        file.write(f"Solution for n={n}, p={p} :\n")
-        file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
-        file.write(f"Objective  : {best_cost/1000:.2f}\n")
-        file.write(f"Allocation : {', '.join(map(str, best_assignments_1_based))}\n")
-        file.write(f"The time use for run code in {n} node and {p} hubs is: {timee:.2f} seconds\n")
-        file.write(f"Path       : {', '.join(map(str, path))}")
-        file.write(f"\n")
-        file.write(f"\n")
-    print(f"Done {n} nodes and {p} hub")
+    # with open('Solution/solution.txt', 'a') as file:
+    #     file.write(f"Solution for n={n}, p={p} :\n")
+    #     file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
+    #     file.write(f"Objective  : {best_cost/1000:.2f}\n")
+    #     file.write(f"Allocation : {', '.join(map(str, best_assignments_1_based))}\n")
+    #     file.write(f"The time use for run code in {n} node and {p} hubs is: {timee:.2f} seconds\n")
+    #     file.write(f"Path       : {', '.join(map(str, path))}")
+    #     file.write(f"\n")
+    #     file.write(f"\n")
+    # print(f"Done {n} nodes and {p} hub")
