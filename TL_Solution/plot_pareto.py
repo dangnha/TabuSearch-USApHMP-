@@ -3,7 +3,7 @@ import os
 from data import initial_coords
 import re
 
-with open('pareto.txt', 'r') as file:
+with open('output/pareto.txt', 'r') as file:
     content = file.read()
     solutions = content.split("Solution")[1:]  # Skip the first empty element
     processed_solutions = []
@@ -19,14 +19,26 @@ with open('pareto.txt', 'r') as file:
                 pareto_str = pareto_match.group(1)
                 pareto_front = eval(pareto_str)
                 
-                plt.figure(figsize=(10, 9))
+                plt.figure(figsize=(16, 10))
+                x_coords = []
+                y_coords = []
                 for solution in pareto_front:
                     cost, time_metric, hubs, assignments = solution
                     hubs = [h + 1 for h in hubs]
                     assignments = [a + 1 for a in assignments]
                     
-                    plt.scatter(time_metric, cost/100, marker='^', color='darkblue', s=50)  # Increased size by 5 times (default is 10)
+                    x_coords.append(time_metric)
+                    y_coords.append(cost/100)
+                    
+                    plt.scatter(time_metric, cost/100, marker='^', color='darkblue', s=200, edgecolors='red')
                     plt.text(time_metric, cost/100, str(hubs), fontsize=9, ha='right')
+
+                # Sort the points by y-coordinate (cost) in descending order
+                sorted_points = sorted(zip(x_coords, y_coords), key=lambda x: x[1], reverse=True)
+                sorted_x, sorted_y = zip(*sorted_points)
+
+                # Connect the points with a red dashed line from top to bottom
+                plt.plot(sorted_x, sorted_y, color='red', linestyle='--', linewidth=1)
 
                 plt.xlabel('Max Travel Time')
                 plt.ylabel('Travel Cost')

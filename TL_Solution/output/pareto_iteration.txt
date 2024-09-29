@@ -1,0 +1,26 @@
+Number of elements in Pareto Front of solution for n=10, p=2: [4, 5, 5, 5, 5]
+
+Number of elements in Pareto Front of solution for n=10, p=3: [5, 12, 12, 12, 12]
+
+Number of elements in Pareto Front of solution for n=10, p=4: [2, 3, 4, 4, 4]
+
+Number of elements in Pareto Front of solution for n=10, p=5: [3, 5, 7, 9, 9]
+
+Number of elements in Pareto Front of solution for n=54, p=2: [12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13]
+
+Number of elements in Pareto Front of solution for n=54, p=3: [17, 28, 35, 38, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+
+Number of elements in Pareto Front of solution for n=54, p=4: [11, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17]
+
+Number of elements in Pareto Front of solution for n=54, p=5: [11, 20, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]
+
+Number of elements in Pareto Front of solution for n=54, p=6: [10, 15, 18, 21, 24, 25, 26, 26, 26, 26, 26, 26, 26, 26, 26]
+
+Number of elements in Pareto Front of solution for n=54, p=7: [8, 16, 24, 32, 38, 44, 45, 45, 45, 45, 45, 45, 45, 45, 45]
+
+Number of elements in Pareto Front of solution for n=54, p=8: [8, 16, 20, 24, 27, 30, 33, 34, 34, 34, 34, 34, 34, 34, 34]
+
+Number of elements in Pareto Front of solution for n=54, p=9: [8, 16, 20, 27, 34, 41, 46, 51, 53, 53, 53, 53, 53, 53, 53]
+
+Number of elements in Pareto Front of solution for n=54, p=10: [8, 16, 23, 32, 44, 51, 59, 69, 78, 86, 92, 92, 92, 92, 92]
+

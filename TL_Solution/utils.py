@@ -175,51 +175,6 @@ def get_neighborhood(hubs, n, distances):
     return neighborhood
 
 
-# def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity):
-#     best_hubs, best_assignments = get_initial_solution_robust(n, p, weights, distances)
-#     best_cost, best_time = calculate_total_cost(best_assignments, n, weights, distances, alpha, delta, ksi, beta, capacity)
-    
-#     current_hubs, current_assignments = best_hubs, best_assignments
-#     tabu_list = []
-#     pareto_front = [(best_cost, best_time, best_hubs, best_assignments)]
-#     iteration = 0
-    
-#     max_iterations = 40 if n > 40 else 10
-
-#     while iteration < max_iterations:
-#         neighborhood = get_neighborhood(current_hubs, n, distances)
-#         best_candidate_hubs, best_candidate_assignments = None, None
-#         best_candidate_cost = float('inf')
-#         best_candidate_time = float('inf')
-
-#         for candidate_hubs, candidate_assignments in neighborhood:
-#             if (candidate_hubs, candidate_assignments) not in tabu_list:
-#                 candidate_cost, candidate_time = calculate_total_cost(candidate_assignments, n, weights, distances, alpha, delta, ksi, beta, capacity)
-                
-#                 if dominates((candidate_cost, candidate_time), (best_candidate_cost, best_candidate_time)):
-#                     best_candidate_hubs, best_candidate_assignments = candidate_hubs, candidate_assignments
-#                     best_candidate_cost, best_candidate_time = candidate_cost, candidate_time
-
-
-#         if dominates((best_candidate_cost, best_candidate_time), (best_cost, best_time)):
-#             best_hubs, best_assignments = best_candidate_hubs, best_candidate_assignments
-#             best_cost, best_time = best_candidate_cost, best_candidate_time
-
-#         current_hubs, current_assignments = best_candidate_hubs, best_candidate_assignments
-#         tabu_list.append((current_hubs, current_assignments))
-#         if len(tabu_list) > tabu_tenure:
-#             tabu_list.pop(0)
-
-#         iteration += 1
-
-#         new_solution = (best_candidate_cost, best_candidate_time, best_candidate_hubs, best_candidate_assignments)
-#         pareto_front = [sol for sol in pareto_front if not dominates(new_solution[:2], sol[:2])]
-#         if not any(dominates(sol[:2], new_solution[:2]) for sol in pareto_front):
-#             pareto_front.append(new_solution)
-
-#     return pareto_front
-
-
 def plot_solution(coords, hubs, assignments):
     plt.figure(figsize=(20, 16))
     for i, coord in enumerate(coords):
@@ -271,7 +226,12 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
     pareto_front = [[(best_cost, best_time, best_hubs, best_assignments)]]
     iteration = 0
     
-    max_iterations = 40 if n > 40 else 5
+    max_iterations = 15 if n > 40 else 5
+    count_pareto = []  # Initialize count_pareto list
+    
+    # Initialize lists to store best cost and time for each iteration
+    best_costs = [best_cost]
+    best_times = [best_time]
 
     while iteration < max_iterations:
         pre_non_dominated_list = pareto_front[-1]
@@ -293,14 +253,27 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
         
         new_pareto_front = remove_dominated_solutions(new_pareto_front)
         
-        for candidate_hubs, candidate_assignments, _, _ in new_pareto_front:
+        for solution in new_pareto_front:
+            candidate_hubs, candidate_assignments = solution[2], solution[3]
             tabu_list.append((candidate_hubs, candidate_assignments))
             
         if len(tabu_list) > tabu_tenure:
             tabu_list.pop(0)
-
+        
         iteration += 1
         if new_pareto_front:
             pareto_front.append(new_pareto_front)
             
-    return pareto_front
+            # Update best cost and time for this iteration
+            iteration_best_cost = min(solution[0] for solution in new_pareto_front)
+            iteration_best_time = min(solution[1] for solution in new_pareto_front)
+            best_costs.append(min(best_costs[-1], iteration_best_cost))
+            best_times.append(min(best_times[-1], iteration_best_time))
+        else:
+            # If no new solutions, keep the previous best
+            best_costs.append(best_costs[-1])
+            best_times.append(best_times[-1])
+            
+        count_pareto.append(len([item for sublist in pareto_front for item in sublist]))
+        
+    return pareto_front, count_pareto, best_costs, best_times

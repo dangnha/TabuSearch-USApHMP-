@@ -1,0 +1,91 @@
+Solution for n=10, p=2 :
+Best Hubs  : 1, 7
+Best Total Cost  : 470611.18
+Best Max Travel Time : 69.46 
+The time used for running the code in 10 nodes and 2 hubs is: 0.02 seconds
+
+
+Solution for n=10, p=3 :
+Best Hubs  : 8, 1, 5
+Best Total Cost  : 349987.01
+Best Max Travel Time : 60.01 
+The time used for running the code in 10 nodes and 3 hubs is: 0.11 seconds
+
+
+Solution for n=10, p=4 :
+Best Hubs  : 9, 2, 7, 5
+Best Total Cost  : 343393.67
+Best Max Travel Time : 50.51 
+The time used for running the code in 10 nodes and 4 hubs is: 0.03 seconds
+
+
+Solution for n=10, p=5 :
+Best Hubs  : 9, 1, 7, 2, 5
+Best Total Cost  : 212181.72
+Best Max Travel Time : 48.54 
+The time used for running the code in 10 nodes and 5 hubs is: 0.04 seconds
+
+
+Solution for n=54, p=2 :
+Best Hubs  : 5, 40
+Best Total Cost  : 28707690.28
+Best Max Travel Time : 594.17 
+The time used for running the code in 54 nodes and 2 hubs is: 15.43 seconds
+
+
+Solution for n=54, p=3 :
+Best Hubs  : 1, 40, 21
+Best Total Cost  : 21128862.90
+Best Max Travel Time : 531.41 
+The time used for running the code in 54 nodes and 3 hubs is: 45.12 seconds
+
+
+Solution for n=54, p=4 :
+Best Hubs  : 52, 46, 4, 24
+Best Total Cost  : 21188402.08
+Best Max Travel Time : 420.83 
+The time used for running the code in 54 nodes and 4 hubs is: 93.40 seconds
+
+
+Solution for n=54, p=5 :
+Best Hubs  : 52, 46, 31, 13, 1
+Best Total Cost  : 16118298.77
+Best Max Travel Time : 371.67 
+The time used for running the code in 54 nodes and 5 hubs is: 62.91 seconds
+
+
+Solution for n=54, p=6 :
+Best Hubs  : 52, 3, 37, 22, 12, 47
+Best Total Cost  : 13701317.14
+Best Max Travel Time : 359.66 
+The time used for running the code in 54 nodes and 6 hubs is: 43.85 seconds
+
+
+Solution for n=54, p=7 :
+Best Hubs  : 52, 1, 12, 22, 47, 27, 37
+Best Total Cost  : 12159936.64
+Best Max Travel Time : 363.38 
+The time used for running the code in 54 nodes and 7 hubs is: 78.73 seconds
+
+
+Solution for n=54, p=8 :
+Best Hubs  : 52, 1, 12, 6, 22, 37, 27, 47
+Best Total Cost  : 11229865.41
+Best Max Travel Time : 349.10 
+The time used for running the code in 54 nodes and 8 hubs is: 68.65 seconds
+
+
+Solution for n=54, p=9 :
+Best Hubs  : 52, 1, 12, 6, 40, 34, 22, 27, 47
+Best Total Cost  : 10215346.05
+Best Max Travel Time : 349.10 
+The time used for running the code in 54 nodes and 9 hubs is: 120.70 seconds
+
+
+Solution for n=54, p=10 :
+Best Hubs  : 1, 12, 5, 54, 40, 34, 51, 22, 27, 47
+Best Total Cost  : 9624971.32
+Best Max Travel Time : 345.14 
+The time used for running the code in 54 nodes and 10 hubs is: 232.59 seconds
+
+

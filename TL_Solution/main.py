@@ -6,10 +6,13 @@ import matplotlib.pyplot as plt
 import os
 import matplotlib.ticker as mticker
 
-# experements = ["10.2", "10.3", "10.4", "20.2", "20.3", "20.4", "40.2", "40.3", "40.4", "50.2", "50.3", "50.4", "100.2", "100.3", "100.4"]
-experements = ["10.2", "10.3", "10.4", "10.5", "54.2", "54.3", "54.4", "54.5", "54.6", "54.7", "54.8", "54.9", "54.10",]
 
-for file_db in experements:
+
+with open('hub_node.txt', 'r') as file:
+    experiments = eval(file.read().strip())
+# experiments = ["10.2", "10.3", "10.4", "10.5", "54.2", "54.3", "54.4", "54.5", "54.6", "54.7", "54.8", "54.9", "54.10",]
+
+for file_db in experiments:
     n, p, alpha, delta, ksi, coords, weights, distances, beta, capacity = initial_parameter(file_db)
     tabu_tenure = 50
 
@@ -47,7 +50,7 @@ for file_db in experements:
     # Run the Tabu Search for the specified number of iterations
     for i in range(iterations):
         start_time = time.time()
-        pareto_front = tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity)
+        pareto_front, count_pareto, best_costs, best_times = tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity)
         end_time = time.time()
 
         elapsed_time = end_time - start_time
@@ -92,7 +95,7 @@ for file_db in experements:
     print(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds")
     # plot_solution(coords, best_hubs, best_assignments)
 
-    with open('pareto.txt', 'a') as file:
+    with open('output/pareto.txt', 'a') as file:
         file.write(f"Solution for n={n}, p={p} :\n")
         # file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
         # file.write(f"Best Total Cost  : {best_cost/100:.2f}\n")
@@ -103,6 +106,31 @@ for file_db in experements:
         file.write(f"Pareto: {remove_dominated_solutions(pareto_front)}")
         file.write("\n")
         file.write("\n")
+        
+    with open('output/solution.txt', 'a') as file:
+        file.write(f"Solution for n={n}, p={p} :\n")
+        file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
+        file.write(f"Best Total Cost  : {best_cost/100:.2f}\n")
+        file.write((f"Best Max Travel Time : {best_time_metric_cost:.2f} \n"))
+        file.write(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds\n")
+        file.write("\n")
+        file.write("\n")
+    
+    with open('output/pareto_iteration.txt', 'a') as file:
+        file.write(f"Number of elements in Pareto Front of solution for n={n}, p={p}: {count_pareto}")
+        file.write("\n")
+        file.write("\n")
+        
+    with open('output/best_cost_iteration.txt', 'a') as file:
+        file.write(f"Best Cost of Pareto Front of solution for n={n}, p={p}: {best_costs}")
+        file.write("\n")
+        file.write("\n")
+    
+    with open('output/best_time_iteration.txt', 'a') as file:
+        file.write(f"Best Time of Pareto Front of solution for n={n}, p={p}: {best_times}")
+        file.write("\n")
+        file.write("\n")
+    
     
     # print(pareto_front)
 
