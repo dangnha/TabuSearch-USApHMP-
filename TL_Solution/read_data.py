@@ -9,7 +9,7 @@ import numpy as np
 #     coords = df.iloc[1:3].to_numpy()
 
 #     nodes = 10
-#     hubs = 2
+#     hubs = 5
 #     ksi, delta, alpha, beta = 3, 2, 0.4, 0.5
     
 #     return nodes, coords.T, flow_10, hubs, ksi, delta, alpha, beta
@@ -32,7 +32,7 @@ import numpy as np
 #         f.write(f"{beta:.6f}\n")
 #         print("Complete")
         
-# save_data_to_txt_10('data/10.2', nodes, coords, flows, hubs, ksi, delta, alpha, beta)
+# save_data_to_txt_10(f'data/{nodes}.{hubs}', nodes, coords, flows, hubs, ksi, delta, alpha, beta)
 
 
 def generate_data_54():
@@ -48,7 +48,7 @@ def generate_data_54():
     print(capacity)
     
     nodes = 54
-    hubs = 7
+    hubs = 4
     ksi, delta, alpha, beta = 3, 2, 0.4, 0.5
     
     return nodes, coords.T, flow_54, hubs, ksi, delta, alpha, beta, capacity

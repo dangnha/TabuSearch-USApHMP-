@@ -142,7 +142,7 @@ def calculate_time(assignments, n, weights, travel_times, beta):
             if assignments[i] == k and assignments[j] == l:
                 time_ik = travel_times[i][k]
                 time_lj = travel_times[l][j]
-                transhipment_time = beta * travel_times[k][l] # + 20
+                transhipment_time = beta * travel_times[k][l] + 20
                 total_time = time_ik + time_lj + transhipment_time
                 
                 if total_time > max_time:
@@ -302,6 +302,5 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
         iteration += 1
         if new_pareto_front:
             pareto_front.append(new_pareto_front)
-        # if iteration == 39:
-        #     print(pareto_front)
+            
     return pareto_front

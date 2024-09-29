@@ -1,5 +1,5 @@
 import time
-from utils import tabu_search, plot_solution
+from utils import tabu_search, plot_solution, remove_dominated_solutions
 from data import initial_parameter
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +7,7 @@ import os
 import matplotlib.ticker as mticker
 
 # experements = ["10.2", "10.3", "10.4", "20.2", "20.3", "20.4", "40.2", "40.3", "40.4", "50.2", "50.3", "50.4", "100.2", "100.3", "100.4"]
-experements = ["10.2", "54.3","54.5","54.7"]
+experements = ["10.2", "10.3", "10.4", "10.5", "54.2", "54.3", "54.4", "54.5", "54.6", "54.7", "54.8", "54.9", "54.10",]
 
 for file_db in experements:
     n, p, alpha, delta, ksi, coords, weights, distances, beta, capacity = initial_parameter(file_db)
@@ -62,77 +62,78 @@ for file_db in experements:
             solutions_cost[cost] = (hubs, assignments, time_metric)
             
         # Timeeeeeeeeeeeeeeeeeee
-        for solution in pareto_front:
-            cost, time_metric, hubs, assignments = solution
-            time_metrics.append(time_metric)
-            solutions_time[time_metric] = (hubs, assignments, cost)
+        # for solution in pareto_front:
+        #     cost, time_metric, hubs, assignments = solution
+        #     time_metrics.append(time_metric)
+        #     solutions_time[time_metric] = (hubs, assignments, cost)
 
     # Find the best solution based on cost
     best_cost = min(costs)
     best_hubs_cost, best_assignments_cost, best_time_metric_cost = solutions_cost[best_cost]
+    min_time = min(times)
     
     # =================================================================================================
     # Find the best solution based on time
-    best_time_metric = min(time_metrics)
-    best_hubs_times, best_assignments_times, best_cost_times = solutions_time[time_metric]
+    # best_time_metric = min(time_metrics)
+    # best_hubs_times, best_assignments_times, best_cost_times = solutions_time[time_metric]
     
-    min_time = min(times)
 
 
     # Convert best_assignments to 1-based index for clearer output
-    best_assignments_1_based = [x + 1 for x in best_assignments_times]
-    best_hubs_1_based = [x + 1 for x in best_hubs_times]
+    best_assignments_1_based = [x + 1 for x in best_assignments_cost]
+    best_hubs_1_based = [x + 1 for x in best_hubs_cost]
 
     # Output the results
     print(f"Solution for n={n}, p={p} :")
     print(f"Best Hubs  : {best_hubs_1_based}")
-    print(f"Objective  : {best_cost/100:.2f}")
-    print(f"Allocation : {', '.join(map(str, best_assignments_1_based))}")
-    print(f"Best Time : {best_time_metric}")
+    print(f"Best Total Cost  : {best_cost/100:.2f}")
+    print(f"Best Max Travel Time : {best_time_metric_cost}")
+    # print(f"Allocation : {', '.join(map(str, best_assignments_1_based))}")
     print(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds")
     # plot_solution(coords, best_hubs, best_assignments)
 
-    with open('solution.txt', 'a') as file:
+    with open('pareto.txt', 'a') as file:
         file.write(f"Solution for n={n}, p={p} :\n")
-        file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
-        file.write(f"Objective  : {best_cost/100:.2f}\n")
-        file.write(f"Allocation : {', '.join(map(str, best_assignments_1_based))}\n")
-        file.write((f"Best Time : {best_time_metric:.2f} \n"))
-        file.write(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds\n")
+        # file.write(f"Best Hubs  : {', '.join(map(str, best_hubs_1_based))}\n")
+        # file.write(f"Best Total Cost  : {best_cost/100:.2f}\n")
+        # file.write((f"Best Max Travel Time : {best_time_metric_cost:.2f} \n"))
+        # file.write(f"Allocation : {', '.join(map(str, best_assignments_1_based))}\n")
+        # file.write(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds\n")
         # file.write(f"Patero collection: {pareto_front}\n")
+        file.write(f"Pareto: {remove_dominated_solutions(pareto_front)}")
         file.write("\n")
         file.write("\n")
     
-    print(pareto_front)
+    # print(pareto_front)
 
     # Your code
-    y_coords = [item[1] for item in pareto_front]
-    x_coords = [item[0]/100 for item in pareto_front]
-    labels = [item[2] for item in pareto_front]
-    labels = [
-        [label[0]] + [label[1] + 1 if label[1] == 0 else label[1]] + label[2:] 
-        for label in labels
-    ]
-    # Create the scatter plot
-    plt.figure(figsize=(20, 18))
-    plt.scatter(x_coords, y_coords)
+    # x_coords = [item[1] for item in pareto_front]
+    # y_coords = [item[0]/100 for item in pareto_front]
+    # labels = [item[2] for item in pareto_front]
+    # for allocation in range(len(labels)):
+    #     for node in range(len(labels[allocation])):
+    #         labels[allocation][node] += 1
 
-    # Add labels to the points
-    for i, label in enumerate(labels):
-        plt.text(x_coords[i], y_coords[i], str(label), fontsize=9, ha='right')
+    # # Create the scatter plot
+    # plt.figure(figsize=(20, 18))
+    # plt.scatter(x_coords, y_coords)
 
-    # Set the labels for the axes
-    plt.xlabel('Travel Cost')
-    plt.ylabel('Max Travel Time')
-    plt.title('Scatter Plot with Labels')
+    # # Add labels to the points
+    # for i, label in enumerate(labels):
+    #     plt.text(x_coords[i], y_coords[i], str(label), fontsize=9, ha='right')
 
-    # Disable scientific notation on the x-axis
-    plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
-    plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
+    # # Set the labels for the axes
+    # plt.xlabel('Max Travel Time')
+    # plt.ylabel('Travel Cost')
+    # plt.title('Scatter Plot with Labels')
 
-    # Display the plot
-    plt.grid(True)
-    plt.show()
+    # # Disable scientific notation on the x-axis
+    # plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
+    # plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
+
+    # # Display the plot
+    # plt.grid(True)
+    # plt.show()
     
     
     # # Define the folder and file name
