@@ -11,6 +11,7 @@ import matplotlib.ticker as mticker
 with open('hub_node.txt', 'r') as file:
     experiments = eval(file.read().strip())
 # experiments = ["10.2", "10.3", "10.4", "10.5", "54.2", "54.3", "54.4", "54.5", "54.6", "54.7", "54.8", "54.9", "54.10",]
+print("Running Successfully! Please wait a moment...")
 
 for file_db in experiments:
     n, p, alpha, delta, ksi, coords, weights, distances, beta, capacity = initial_parameter(file_db)
@@ -94,6 +95,10 @@ for file_db in experiments:
     # print(f"Allocation : {', '.join(map(str, best_assignments_1_based))}")
     print(f"The time used for running the code in {n} nodes and {p} hubs is: {min_time:.2f} seconds")
     # plot_solution(coords, best_hubs, best_assignments)
+
+    # Create output folder if it doesn't exist
+    if not os.path.exists('output'):
+        os.makedirs('output')
 
     with open('output/pareto.txt', 'a') as file:
         file.write(f"Solution for n={n}, p={p} :\n")
