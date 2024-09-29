@@ -136,46 +136,25 @@ for file_db in experiments:
         file.write("\n")
         file.write("\n")
     
-    
-    # print(pareto_front)
 
-    # Your code
-    # x_coords = [item[1] for item in pareto_front]
-    # y_coords = [item[0]/100 for item in pareto_front]
-    # labels = [item[2] for item in pareto_front]
-    # for allocation in range(len(labels)):
-    #     for node in range(len(labels[allocation])):
-    #         labels[allocation][node] += 1
+# Run all plot files
+import subprocess
+import os
 
-    # # Create the scatter plot
-    # plt.figure(figsize=(20, 18))
-    # plt.scatter(x_coords, y_coords)
+plot_files = [
+    'plot_performance.py',
+    'plot_box.py',
+    'plot_pareto.py',
+    'plot_iteration.py'
+]
 
-    # # Add labels to the points
-    # for i, label in enumerate(labels):
-    #     plt.text(x_coords[i], y_coords[i], str(label), fontsize=9, ha='right')
+for plot_file in plot_files:
+    try:
+        subprocess.run(['python', plot_file], check=True)
+        print(f"Successfully ran {plot_file}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error running {plot_file}: {e}")
+    except FileNotFoundError:
+        print(f"File not found: {plot_file}")
 
-    # # Set the labels for the axes
-    # plt.xlabel('Max Travel Time')
-    # plt.ylabel('Travel Cost')
-    # plt.title('Scatter Plot with Labels')
-
-    # # Disable scientific notation on the x-axis
-    # plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
-    # plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
-
-    # # Display the plot
-    # plt.grid(True)
-    # plt.show()
-    
-    
-    # # Define the folder and file name
-    # folder = 'patero_visualize'  # Replace with your desired folder path
-    # file_name = f'scatter_plot{n}-{p}.png'
-
-    # # Create the folder if it doesn't exist
-    # os.makedirs(folder, exist_ok=True)
-
-    # # Save the plot
-    # file_path = os.path.join(folder, file_name)
-    # plt.savefig(file_path)
+print("All plot files have been executed.")
