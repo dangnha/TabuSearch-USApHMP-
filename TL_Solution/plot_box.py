@@ -64,10 +64,12 @@ ax1.tick_params(axis='both', which='major', labelsize=7)
 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 
 # Set y-axis limits for cost plot with reduced range
-cost_min = np.percentile([val for sublist in cost_values for val in sublist], 5)
-cost_max = np.percentile([val for sublist in cost_values for val in sublist], 95)
-cost_range = cost_max - cost_min
-ax1.set_ylim(cost_min - 0.02 * cost_range, cost_max + 0.02 * cost_range)
+cost_values_flat = [val for sublist in cost_values for val in sublist if val]
+if cost_values_flat:
+    cost_min = np.percentile(cost_values_flat, 5)
+    cost_max = np.percentile(cost_values_flat, 95)
+    cost_range = cost_max - cost_min
+    ax1.set_ylim(cost_min - 0.02 * cost_range, cost_max + 0.02 * cost_range)
 
 # Plot Max Travel Time
 ax2.boxplot(time_values, positions=p_values, widths=0.8, patch_artist=True,
@@ -83,10 +85,12 @@ ax2.set_xticks(p_values)
 ax2.tick_params(axis='both', which='major', labelsize=7)
 
 # Set y-axis limits for time plot with reduced range
-time_min = np.percentile([val for sublist in time_values for val in sublist], 5)
-time_max = np.percentile([val for sublist in time_values for val in sublist], 95)
-time_range = time_max - time_min
-ax2.set_ylim(time_min - 0.02 * time_range, time_max + 0.02 * time_range)
+time_values_flat = [val for sublist in time_values for val in sublist if val]
+if time_values_flat:
+    time_min = np.percentile(time_values_flat, 5)
+    time_max = np.percentile(time_values_flat, 95)
+    time_range = time_max - time_min
+    ax2.set_ylim(time_min - 0.02 * time_range, time_max + 0.02 * time_range)
 
 # Adjust layout and reduce white space
 plt.tight_layout()
