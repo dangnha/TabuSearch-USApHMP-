@@ -19,7 +19,7 @@ with open('output/pareto.txt', 'r') as file:
                 pareto_str = pareto_match.group(1)
                 pareto_front = eval(pareto_str)
                 
-                plt.figure(figsize=(16, 10))
+                plt.figure(figsize=(18, 10))
                 x_coords = []
                 y_coords = []
                 for solution in pareto_front:
@@ -30,8 +30,11 @@ with open('output/pareto.txt', 'r') as file:
                     x_coords.append(time_metric)
                     y_coords.append(cost/100)
                     
-                    plt.scatter(time_metric, cost/100, marker='^', color='darkblue', s=200, edgecolors='red')
-                    plt.text(time_metric, cost/100, str(hubs), fontsize=9, ha='right')
+                    
+                    plt.scatter(time_metric, cost/100, marker='^', color='darkblue', s=250, edgecolors='red')
+                    plt.text(time_metric, cost/100, str(hubs), fontsize=16, ha='right')
+                    # plt.scatter(time_metric, cost/100, marker='o', color='green', s=250, edgecolors='black', alpha=0.7)
+                    # plt.text(time_metric, cost/100, str(hubs), fontsize=14, ha='right', va='bottom', bbox=dict(facecolor='white', edgecolor='none', alpha=0.7))
 
                 # Sort the points by y-coordinate (cost) in descending order
                 sorted_points = sorted(zip(x_coords, y_coords), key=lambda x: x[1], reverse=True)
@@ -40,16 +43,16 @@ with open('output/pareto.txt', 'r') as file:
                 # Connect the points with a red dashed line from top to bottom
                 plt.plot(sorted_x, sorted_y, color='red', linestyle='--', linewidth=1)
 
-                plt.xlabel('Max Travel Time')
-                plt.ylabel('Travel Cost')
-                plt.title(f'Pareto Plot for n={n}, p={p}')
+                plt.xlabel('Max Travel Time', fontsize=14)
+                plt.ylabel('Travel Cost', fontsize=14)
+                plt.title(f'Pareto Plot for n={n}, p={p}', fontsize=16)
 
                 plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
                 plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
 
                 plt.grid(True)
 
-                output_folder = 'pareto_plots'
+                output_folder = 'pareto_plots_conference'
                 os.makedirs(output_folder, exist_ok=True)
                 filename = f'pareto_plot_n{n}_p{p}.png'
                 filepath = os.path.join(output_folder, filename)

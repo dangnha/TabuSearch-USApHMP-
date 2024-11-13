@@ -51,7 +51,7 @@ for file_db in experiments:
     # Run the Tabu Search for the specified number of iterations
     for i in range(iterations):
         start_time = time.time()
-        pareto_front, count_pareto, best_costs, best_times = tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity)
+        pareto_front, count_pareto, best_costs, best_times, number_of_generating_solutions = tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity)
         end_time = time.time()
 
         elapsed_time = end_time - start_time
@@ -135,6 +135,11 @@ for file_db in experiments:
         file.write(f"Best Time of Pareto Front of solution for n={n}, p={p}: {best_times}")
         file.write("\n")
         file.write("\n")
+        
+    with open('output/number_of_generating_solutions_iteration.txt', 'a') as file:
+        file.write(f"Number of generating solutions of Pareto Front of solution for n={n}, p={p}: {number_of_generating_solutions}")
+        file.write("\n")
+        file.write("\n")
     
 
 # Run all plot files
@@ -145,7 +150,9 @@ plot_files = [
     'plot_performance.py',
     'plot_box.py',
     'plot_pareto.py',
-    'plot_iteration.py'
+    'plot_pareto_MOTS_NSGAII.py',
+    'plot_iteration.py',
+    'plot_solution.py'
 ]
 
 for plot_file in plot_files:

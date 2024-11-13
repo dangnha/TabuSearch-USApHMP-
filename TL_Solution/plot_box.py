@@ -6,7 +6,7 @@ import re
 def read_pareto_data(filename):
     with open(filename, 'r') as f:
         content = f.read()
-
+    
     data = {}
     solutions = content.split("Solution")[1:]  # Skip the first empty element
     for solution in solutions:

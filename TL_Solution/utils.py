@@ -232,12 +232,15 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
     # Initialize lists to store best cost and time for each iteration
     best_costs = [best_cost]
     best_times = [best_time]
-
+    number_of_generating_solutions = []
     while iteration < max_iterations:
+        number_of_generating_solutions_each_iteration = []
         pre_non_dominated_list = pareto_front[-1]
         new_pareto_front = []
         for current_cost, current_time, current_hubs, _ in pre_non_dominated_list:
             neighborhood = get_neighborhood(current_hubs, n, distances)
+            for neighbor in neighborhood:
+                number_of_generating_solutions_each_iteration.append(neighbor)
             non_dominated_neighbor = []
             
             for candidate_hubs, candidate_assignments in neighborhood:
@@ -275,5 +278,6 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
             best_times.append(best_times[-1])
             
         count_pareto.append(len([item for sublist in pareto_front for item in sublist]))
+        number_of_generating_solutions.append(number_of_generating_solutions_each_iteration)
         
-    return pareto_front, count_pareto, best_costs, best_times
+    return pareto_front, count_pareto, best_costs, best_times, number_of_generating_solutions
