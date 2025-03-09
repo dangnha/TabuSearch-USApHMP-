@@ -84,11 +84,29 @@ def cal_weights(n, weights):
 
             
 # Generate robust solution
-def get_initial_solution_robust(n, p, weights, distances):
+def get_initial_solution_robust(n, p, weights, distances, ksi, alpha):
     potential_hub = cal_weights(n, weights)
     hubs = sorted(potential_hub, key=potential_hub.get)[:p]
-    # allocation = cal_distance(hubs, n, distances)
-    allocation = [min(hubs, key=lambda x: distances[i][x]) for i in range(n)]
+    
+    
+    # Cost-based allocation instead of nearest distance
+    allocation = [-1] * n
+    hub_load = [0] * n  # Track load on each hub
+    for i in range(n):
+        if i in hubs:
+            allocation[i] = i  # Hubs are assigned to themselves
+        else:
+            # Calculate total cost to each hub considering flow and distance
+            costs = []
+            for h in hubs:
+                cost = ksi * distances[i][h] + alpha * sum(distances[h][l] * weights[i][l] for l in range(n)) / (sum(weights[i][l] for l in range(n)) + 1e-6)
+                costs.append((cost, h))
+            # Choose hub with minimum cost
+            _, best_hub = min(costs, key=lambda x: x[0])
+            allocation[i] = best_hub
+            hub_load[best_hub] += sum(weights[i][j] for j in range(n))
+    
+    
     return hubs, allocation
 
 
@@ -156,7 +174,7 @@ def dominates(sol1, sol2):
     return (cost1 <= cost2 and time1 < time2) or (cost1 < cost2 and time1 <= time2)
 
 
-def get_neighborhood(hubs, n, distances):
+def get_neighborhood(hubs, n, distances, weights, alpha, ksi):
     neighborhood = []
     hub_set = set(hubs)
     non_hubs = list(set(range(n)) - hub_set)
@@ -167,8 +185,20 @@ def get_neighborhood(hubs, n, distances):
             new_hubs.remove(hub)
             new_hubs.append(non_hub)
             
-            # Create new assignments based on the new hubs
-            new_assignments = [min(new_hubs, key=lambda x: distances[i][x]) for i in range(n)]
+            # Cost-based allocation for new hub configuration
+            new_assignments = [-1] * n
+            hub_load = [0] * n
+            for i in range(n):
+                if i in new_hubs:
+                    new_assignments[i] = i
+                else:
+                    costs = []
+                    for h in new_hubs:
+                        cost = ksi * distances[i][h] + alpha * sum(distances[h][l] * weights[i][l] for l in range(n)) / (sum(weights[i][l] for l in range(n)) + 1e-6)
+                        costs.append((cost, h))
+                    _, best_hub = min(costs, key=lambda x: x[0])
+                    new_assignments[i] = best_hub
+                    hub_load[best_hub] += sum(weights[i][j] for j in range(n))
             
             neighborhood.append((new_hubs, new_assignments))
     
@@ -220,7 +250,7 @@ def remove_dominated_solutions(solutions):
     return non_dominated
 
 def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, capacity):
-    best_hubs, best_assignments = get_initial_solution_robust(n, p, weights, distances)
+    best_hubs, best_assignments = get_initial_solution_robust(n, p, weights, distances, ksi, alpha)
     best_cost, best_time = calculate_total_cost(best_assignments, n, weights, distances, alpha, delta, ksi, beta, capacity)
     tabu_list = []
     pareto_front = [[(best_cost, best_time, best_hubs, best_assignments)]]
@@ -238,7 +268,7 @@ def tabu_search(tabu_tenure, n, p, weights, distances, alpha, delta, ksi, beta, 
         pre_non_dominated_list = pareto_front[-1]
         new_pareto_front = []
         for current_cost, current_time, current_hubs, _ in pre_non_dominated_list:
-            neighborhood = get_neighborhood(current_hubs, n, distances)
+            neighborhood = get_neighborhood(current_hubs, n, distances, alpha, ksi)
             for neighbor in neighborhood:
                 number_of_generating_solutions_each_iteration.append(neighbor)
             non_dominated_neighbor = []
